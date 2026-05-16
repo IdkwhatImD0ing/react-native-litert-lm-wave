@@ -1,0 +1,112 @@
+{
+  "name": "react-native-litert-lm",
+  "version": "0.3.6",
+  "litertLm": {
+    "version": "0.10.2",
+    "androidMavenVersion": "0.10.2",
+    "iosGitTag": "v0.10.2"
+  },
+  "description": "High-performance LLM inference for React Native using LiteRT-LM. Optimized for Gemma 4 and other on-device language models.",
+  "license": "MIT",
+  "author": "Hugh Chen (https://github.com/hung-yueh)",
+  "waveFork": {
+    "upstream": "https://github.com/hung-yueh/react-native-litert-lm @ 0.3.6 (pristine npm)",
+    "reason": "ONLY change vs upstream 0.3.6: decouple the conflated maxTokens knob into engineMaxTokens (engine KV budget) and outputMaxTokens (per-call decode cap). Framework, postinstall, C header, and litertLm pinning are left pristine so the 0.3.6 C++ bridge still compiles against the upstream v0.10.2 prebuilt framework.",
+    "patched": [
+      "cpp/HybridLiteRTLM.cpp",
+      "cpp/HybridLiteRTLM.hpp",
+      "nitrogen/generated/shared/c++/LLMConfig.hpp",
+      "src/specs/LiteRTLM.nitro.ts",
+      "lib/specs/LiteRTLM.nitro.d.ts"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IdkwhatImD0ing/react-native-litert-lm-wave.git"
+  },
+  "homepage": "https://github.com/hung-yueh/react-native-litert-lm#readme",
+  "bugs": {
+    "url": "https://github.com/hung-yueh/react-native-litert-lm/issues"
+  },
+  "keywords": [
+    "react-native",
+    "nitro",
+    "litert",
+    "litert-lm",
+    "llm",
+    "gemma",
+    "gemma-4",
+    "gemma-3n",
+    "ai",
+    "machine-learning",
+    "on-device",
+    "inference",
+    "expo"
+  ],
+  "main": "lib/index",
+  "module": "lib/index",
+  "types": "lib/index.d.ts",
+  "react-native": "src/index",
+  "source": "src/index",
+  "files": [
+    "src",
+    "lib",
+    "android/src",
+    "android/build.gradle",
+    "android/CMakeLists.txt",
+    "ios/*.mm",
+    "ios/*.m",
+    "cpp",
+    "nitrogen/generated",
+    "scripts/postinstall.js",
+    "scripts/download-ios-frameworks.sh",
+    "scripts/build-ios-engine.sh",
+    "scripts/stubs",
+    "react-native.config.js",
+    "react-native-litert-lm.podspec",
+    "app.plugin.js",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\" --fix",
+    "prepack": "npm run build",
+    "specs": "npx nitrogen",
+    "clean": "rm -rf lib android/build ios/build ios/Frameworks nitrogen/generated",
+    "download-frameworks": "scripts/download-ios-frameworks.sh",
+    "android": "expo run:android",
+    "android:clean": "cd android && ./gradlew clean",
+    "ios": "expo run:ios",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@expo/config-plugins": "~55.0.0",
+    "@types/react": "~19.2.10",
+    "react-native-nitro-modules": "^0.35.4",
+    "release-it": "^19.2.4",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "expo": ">=55.0.0",
+    "react": "*",
+    "react-native": "*",
+    "react-native-nitro-modules": "^0.35.4"
+  },
+  "peerDependenciesMeta": {
+    "expo": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
+  }
+}

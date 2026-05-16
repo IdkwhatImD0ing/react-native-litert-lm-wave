@@ -1,0 +1,6 @@
+# Populated at install time by scripts/postinstall.js (downloads the
+# upstream v0.10.2 prebuilt LiteRT-LM framework from hung-yueh releases).
+ios/Frameworks/
+.ios-frameworks-tmp.zip
+node_modules/
+*.log
